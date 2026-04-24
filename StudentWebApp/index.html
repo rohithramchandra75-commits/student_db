@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🎓 Student Registration</h2>
+
+    <form action="http://localhost:8082/addStudent" method="post">
+        <input type="text" name="id" placeholder="Student ID" required>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="email" placeholder="Email" required>
+
+        <button type="submit" class="btn">Add Student</button>
+    </form>
+
+    <button onclick="loadStudents()" class="btn view-btn">
+        View Students
+    </button>
+
+    <div id="tableData"></div>
+
+</div>
+
+<script>
+function loadStudents() {
+    fetch("http://localhost:8082/students")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("tableData").innerHTML = data;
+        })
+        .catch(err => {
+            console.log(err);
+            alert("Error loading students!");
+        });
+}
+</script>
+
+</body>
+</html>
